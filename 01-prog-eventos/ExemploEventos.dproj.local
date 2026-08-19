@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2026/08/18 20:49:52.393,=C:\Users\Andre Roriz\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2026/08/18 20:51:14.858,C:\Users\Andre Roriz\Downloads\ADS_LPG_2026_SEM02_DELPHI\01-prog-eventos\uPrincipal.dfm=C:\Users\Andre Roriz\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2026/08/18 20:51:14.858,C:\Users\Andre Roriz\Downloads\ADS_LPG_2026_SEM02_DELPHI\01-prog-eventos\uPrincipal.pas=C:\Users\Andre Roriz\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2026/08/18 20:51:32.783,C:\Users\Andre Roriz\Downloads\ADS_LPG_2026_SEM02_DELPHI\01-prog-eventos\ExemploEventos.dproj=C:\Users\Andre Roriz\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+  </Transactions>
+</BorlandProject>
