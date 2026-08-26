@@ -1,9 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>2026/08/20 18:49:58.104,=C:\Users\Andre Roriz\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2026/08/20 18:50:57.178,C:\Users\Andre Roriz\Downloads\ADS_LPG_2026_SEM02_DELPHI\02-aplicacao-basica\uPrincipal.dfm=C:\Users\Andre Roriz\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
-    <Transaction>2026/08/20 18:50:57.178,C:\Users\Andre Roriz\Downloads\ADS_LPG_2026_SEM02_DELPHI\02-aplicacao-basica\uPrincipal.pas=C:\Users\Andre Roriz\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2026/08/20 18:51:15.620,C:\Users\Andre Roriz\Downloads\ADS_LPG_2026_SEM02_DELPHI\02-aplicacao-basica\AplicacaoBasica.dproj=C:\Users\Andre Roriz\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2026/08/20 18:49:58.000.104,=C:\Users\Andre Roriz\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2026/08/20 18:50:57.000.178,C:\Users\Andre Roriz\Documents\Embarcadero\Studio\Projects\Unit1.dfm=C:\Users\Andre Roriz\Downloads\ADS_LPG_2026_SEM02_DELPHI\02-aplicacao-basica\uPrincipal.dfm</Transaction>
+    <Transaction>2026/08/20 18:50:57.000.178,C:\Users\Andre Roriz\Documents\Embarcadero\Studio\Projects\Unit1.pas=C:\Users\Andre Roriz\Downloads\ADS_LPG_2026_SEM02_DELPHI\02-aplicacao-basica\uPrincipal.pas</Transaction>
+    <Transaction>2026/08/20 18:51:15.000.620,C:\Users\Andre Roriz\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\Users\Andre Roriz\Downloads\ADS_LPG_2026_SEM02_DELPHI\02-aplicacao-basica\AplicacaoBasica.dproj</Transaction>
+    <Transaction>2026/08/25 20:45:06.946,=C:\Users\Andre Roriz\Downloads\ADS_LPG_2026_SEM02_DELPHI\02-aplicacao-basica\Unit1.pas</Transaction>
+    <Transaction>2026/08/25 20:45:22.067,C:\Users\Andre Roriz\Downloads\ADS_LPG_2026_SEM02_DELPHI\02-aplicacao-basica\uAluno.dfm=C:\Users\Andre Roriz\Downloads\ADS_LPG_2026_SEM02_DELPHI\02-aplicacao-basica\Unit1.dfm</Transaction>
+    <Transaction>2026/08/25 20:45:22.067,C:\Users\Andre Roriz\Downloads\ADS_LPG_2026_SEM02_DELPHI\02-aplicacao-basica\uAluno.pas=C:\Users\Andre Roriz\Downloads\ADS_LPG_2026_SEM02_DELPHI\02-aplicacao-basica\Unit1.pas</Transaction>
   </Transactions>
 </BorlandProject>

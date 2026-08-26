@@ -2,7 +2,8 @@ program AplicacaoBasica;
 
 uses
   Vcl.Forms,
-  uPrincipal in 'uPrincipal.pas' {frmPrincipal};
+  uPrincipal in 'uPrincipal.pas' {frmPrincipal},
+  uAluno in 'uAluno.pas' {frmAluno};
 
 {$R *.res}
 

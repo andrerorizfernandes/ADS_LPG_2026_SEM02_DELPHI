@@ -18,12 +18,14 @@ type
     tmrPrincipal: TTimer;
     procedure tmrPrincipalTimer(Sender: TObject);
     procedure FormActivate(Sender: TObject);
+    procedure Aluno1Click(Sender: TObject);
   private
     FHoraLogin: TTime;
 
     procedure PreencherDadosDoRodape;
     procedure CapturarHoraDoLogin;
     function TempoLogadoNoSistema(const HoraDoLogin: TTime): TTime;
+    procedure AbrirTelaAluno;
     { Private declarations }
   public
     { Public declarations }
@@ -35,9 +37,25 @@ var
 implementation
 
 uses
-  System.SysUtils;
+  System.SysUtils,
+  uAluno;
 
 {$R *.dfm}
+
+procedure TfrmPrincipal.AbrirTelaAluno;
+begin
+  var lTelaAluno := TfrmAluno.Create(nil);
+  try
+    lTelaAluno.ShowModal;
+  finally
+    lTelaAluno.Free;
+  end;
+end;
+
+procedure TfrmPrincipal.Aluno1Click(Sender: TObject);
+begin
+  AbrirTelaAluno;
+end;
 
 procedure TfrmPrincipal.CapturarHoraDoLogin;
 begin

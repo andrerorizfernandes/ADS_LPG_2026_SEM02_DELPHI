@@ -276,9 +276,6 @@ object frmPrincipal: TfrmPrincipal
       item
         Width = 50
       end>
-    ExplicitLeft = 240
-    ExplicitTop = 248
-    ExplicitWidth = 0
   end
   object menPrincipal: TMainMenu
     Left = 488
@@ -286,7 +283,8 @@ object frmPrincipal: TfrmPrincipal
     object Cadastro1: TMenuItem
       Caption = '&Cadastro'
       object Aluno1: TMenuItem
-        Caption = '&Disciplina'
+        Caption = '&Aluno'
+        OnClick = Aluno1Click
       end
     end
     object Sair1: TMenuItem
