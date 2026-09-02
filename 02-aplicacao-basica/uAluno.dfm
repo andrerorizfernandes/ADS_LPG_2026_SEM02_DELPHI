@@ -14,6 +14,7 @@ object frmAluno: TfrmAluno
   Font.Style = []
   Position = poScreenCenter
   OnActivate = FormActivate
+  OnClose = FormClose
   TextHeight = 15
   object btnGravar: TSpeedButton
     Left = 494
@@ -46,7 +47,6 @@ object frmAluno: TfrmAluno
     ActivePage = tbsCadastro
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 676
     object tbsCadastro: TTabSheet
       Caption = 'Cadastro'
       object lblMatricula: TLabel
@@ -257,22 +257,93 @@ object frmAluno: TfrmAluno
     object tbsResultado: TTabSheet
       Caption = 'Resultado'
       ImageIndex = 1
-      object memResultado: TMemo
+      object dbgResultado: TDBGrid
         Left = 0
         Top = 0
         Width = 670
         Height = 355
         Align = alClient
-        Color = 14869218
+        DataSource = DM.dsrAluno
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
         Font.Name = 'Segoe UI'
-        Font.Style = [fsBold]
+        Font.Style = []
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
         ParentFont = False
         TabOrder = 0
-        ExplicitWidth = 668
-        ExplicitHeight = 222
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -12
+        TitleFont.Name = 'Segoe UI'
+        TitleFont.Style = [fsBold]
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'Matricula'
+            Title.Caption = 'Matr'#237'cula'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Nome'
+            Width = 228
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Cpf'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Sexo'
+            Width = 43
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Endereco'
+            Title.Caption = 'Endere'#231'o'
+            Width = 212
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Numero'
+            Title.Caption = 'N'#250'mero'
+            Width = 67
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Complemento'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Bairro'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Municipio'
+            Title.Caption = 'Munic'#237'pio'
+            Width = 141
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Uf'
+            Width = 40
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'EstadoCivil'
+            Title.Caption = 'Estado civil'
+            Visible = True
+          end>
       end
     end
   end

@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.Buttons, Vcl.StdCtrls,
-  Vcl.ExtCtrls;
+  Vcl.ExtCtrls, Data.DB, Vcl.Grids, Vcl.DBGrids, uDM;
 
 type
   TfrmAluno = class(TForm)
@@ -14,7 +14,6 @@ type
     tbsResultado: TTabSheet;
     btnGravar: TSpeedButton;
     btnCancelar: TSpeedButton;
-    memResultado: TMemo;
     lblMatricula: TLabel;
     edtMatricula: TEdit;
     edtNome: TEdit;
@@ -38,10 +37,13 @@ type
     lblObservacoes: TLabel;
     memObservacoes: TMemo;
     rdgEstadoCivil: TRadioGroup;
+    dbgResultado: TDBGrid;
     procedure FormActivate(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     procedure PrepararAmbiente;
+    procedure EncerrarAmbiente;
     procedure CadastrarAluno;
     function ValidarCamposObrigatorios: Boolean;
     { Private declarations }
@@ -61,7 +63,7 @@ end;
 
 procedure TfrmAluno.CadastrarAluno;
 begin
-  tbsResultado.TabVisible := True;
+  {tbsResultado.TabVisible := True;
 
   memResultado.Clear;
   memResultado.Lines.Add('Dados cadastrados:');
@@ -81,7 +83,12 @@ begin
 
   pgcAluno.ActivePage := tbsResultado;
   Caption := 'Aluno';
-  ShowMessage('Cadastro concluído com sucesso.');
+  ShowMessage('Cadastro concluído com sucesso.'); }
+end;
+
+procedure TfrmAluno.EncerrarAmbiente;
+begin
+  DM.cdsAluno.Close;
 end;
 
 procedure TfrmAluno.FormActivate(Sender: TObject);
@@ -89,9 +96,20 @@ begin
   PrepararAmbiente;
 end;
 
+procedure TfrmAluno.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  EncerrarAmbiente;
+end;
+
 procedure TfrmAluno.PrepararAmbiente;
 begin
   Caption := 'Cadastrar novo aluno';
+
+  if (not DM.cdsAluno.Active) then
+    DM.cdsAluno.CreateDataSet;
+
+  DM.cdsAluno.Open;
+
   tbsResultado.TabVisible := False;
   tbsCadastro.SetFocus;
   edtMatricula.SetFocus;
