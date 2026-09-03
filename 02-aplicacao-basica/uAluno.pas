@@ -45,7 +45,10 @@ type
     procedure PrepararAmbiente;
     procedure EncerrarAmbiente;
     procedure CadastrarAluno;
+    procedure LimparCampos;
     function ValidarCamposObrigatorios: Boolean;
+    function RetornarSexoSelecionado(const IndiceSelecionado: Integer): string;
+    function RetornarEstadoCivilSelecionado(const IndiceSelecionado: Integer): string;
     { Private declarations }
   public
     { Public declarations }
@@ -63,27 +66,32 @@ end;
 
 procedure TfrmAluno.CadastrarAluno;
 begin
-  {tbsResultado.TabVisible := True;
+  try
+    DM.cdsAlunoMatricula.AsInteger := StrToInt(edtMatricula.Text);
+    DM.cdsAlunoNome.AsString := edtNome.Text;
+    DM.cdsAlunoCpf.AsString := edtCpf.Text;
+    DM.cdsAlunoSexo.AsString := RetornarSexoSelecionado(cboSexo.ItemIndex);
+    DM.cdsAlunoEndereco.AsString := edtEndereco.Text;
+    DM.cdsAlunoNumero.AsString := edtNumero.Text;
+    DM.cdsAlunoComplemento.AsString := edtComplemento.Text;
+    DM.cdsAlunoBairro.AsString := edtBairro.Text;
+    DM.cdsAlunoMunicipio.AsString := edtMunicipio.Text;
+    DM.cdsAlunoUf.AsString := cboUf.Text;
+    DM.cdsAlunoEstadoCivil.AsString := RetornarEstadoCivilSelecionado(rdgEstadoCivil.ItemIndex);
+    DM.cdsAlunoObservacoes.AsString := memObservacoes.Text;
 
-  memResultado.Clear;
-  memResultado.Lines.Add('Dados cadastrados:');
-  memResultado.Lines.Add('');
+    DM.cdsAluno.Post;
+  except
+    on E: Exception do
+      ShowMessage('Ocorreu um erro ao gravar os dados.' + sLineBreak +
+        'Erro original: ' + E.Message);
+  end;
 
-  memResultado.Lines.Add('Matrícula: ' + edtMatricula.Text);
-  memResultado.Lines.Add('Nome: ' + edtNome.Text);
-  memResultado.Lines.Add('Cpf: ' + edtCpf.Text);
-  memResultado.Lines.Add('Sexo: ' + cboSexo.Text);
-  memResultado.Lines.Add('Endereço: ' + edtEndereco.Text);
-  memResultado.Lines.Add('Número: ' + edtNumero.Text);
-  memResultado.Lines.Add('Complemento: ' + edtComplemento.Text);
-  memResultado.Lines.Add('Bairro: ' + edtBairro.Text);
-  memResultado.Lines.Add('Município: ' + edtMunicipio.Text);
-  memResultado.Lines.Add('Uf: ' + cboUf.Text);
-  memResultado.Lines.Add('Observações: ' + memObservacoes.Text);
-
+  tbsResultado.TabVisible := True;
   pgcAluno.ActivePage := tbsResultado;
-  Caption := 'Aluno';
-  ShowMessage('Cadastro concluído com sucesso.'); }
+  LimparCampos;
+
+  DM.cdsAluno.Append;
 end;
 
 procedure TfrmAluno.EncerrarAmbiente;
@@ -101,6 +109,22 @@ begin
   EncerrarAmbiente;
 end;
 
+procedure TfrmAluno.LimparCampos;
+begin
+  edtMatricula.Text := EmptyStr;
+  edtNome.Text := EmptyStr;
+  edtCpf.Text := EmptyStr;
+  cboSexo.ItemIndex := -1;
+  edtEndereco.Text := EmptyStr;
+  edtNumero.Text := EmptyStr;
+  edtComplemento.Text := EmptyStr;
+  edtBairro.Text := EmptyStr;
+  edtMunicipio.Text := EmptyStr;
+  cboUf.ItemIndex := -1;
+  rdgEstadoCivil.ItemIndex := -1;
+  memObservacoes.Clear;
+end;
+
 procedure TfrmAluno.PrepararAmbiente;
 begin
   Caption := 'Cadastrar novo aluno';
@@ -109,10 +133,36 @@ begin
     DM.cdsAluno.CreateDataSet;
 
   DM.cdsAluno.Open;
+  DM.cdsAluno.Append;
 
   tbsResultado.TabVisible := False;
   tbsCadastro.SetFocus;
   edtMatricula.SetFocus;
+end;
+
+function TfrmAluno.RetornarEstadoCivilSelecionado(
+  const IndiceSelecionado: Integer): string;
+begin
+  Result := EmptyStr;
+  case IndiceSelecionado of
+    0: Exit('C');
+    1: Exit('D');
+    2: Exit('J');
+    3: Exit('S');
+    4: Exit('U');
+    5: Exit('V');
+  end;
+end;
+
+function TfrmAluno.RetornarSexoSelecionado(
+  const IndiceSelecionado: Integer): string;
+begin
+  Result := EmptyStr;
+  case IndiceSelecionado of
+    0: Exit('F');
+    1: Exit('M');
+    2: Exit('N');
+  end;
 end;
 
 function TfrmAluno.ValidarCamposObrigatorios: Boolean;
