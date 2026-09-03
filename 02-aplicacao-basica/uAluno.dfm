@@ -318,11 +318,13 @@ object frmAluno: TfrmAluno
           item
             Expanded = False
             FieldName = 'Complemento'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'Bairro'
+            Width = 64
             Visible = True
           end
           item
@@ -342,6 +344,7 @@ object frmAluno: TfrmAluno
             Expanded = False
             FieldName = 'EstadoCivil'
             Title.Caption = 'Estado civil'
+            Width = 64
             Visible = True
           end>
       end

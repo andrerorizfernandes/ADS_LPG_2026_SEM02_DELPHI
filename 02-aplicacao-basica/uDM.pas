@@ -12,7 +12,6 @@ type
     cdsAlunoMatricula: TIntegerField;
     cdsAlunoNome: TStringField;
     cdsAlunoCpf: TStringField;
-    cdsAlunoSexo: TStringField;
     cdsAlunoEndereco: TStringField;
     cdsAlunoNumero: TStringField;
     cdsAlunoComplemento: TStringField;
@@ -21,6 +20,7 @@ type
     cdsAlunoUf: TStringField;
     cdsAlunoEstadoCivil: TStringField;
     cdsAlunoObservacoes: TStringField;
+    cdsAlunoSexo: TStringField;
   private
     { Private declarations }
   public
