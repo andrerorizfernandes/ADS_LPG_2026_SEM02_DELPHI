@@ -3,7 +3,7 @@ object frmAluno: TfrmAluno
   Top = 0
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
-  Caption = 'Aluno'
+  Caption = 'Alunos'
   ClientHeight = 415
   ClientWidth = 678
   Color = clBtnFace
@@ -15,26 +15,17 @@ object frmAluno: TfrmAluno
   Position = poScreenCenter
   OnActivate = FormActivate
   OnClose = FormClose
+  OnCreate = FormCreate
   TextHeight = 15
   object btnGravar: TSpeedButton
-    Left = 494
-    Top = 385
-    Width = 92
-    Height = 30
-    Align = alRight
-    Caption = '&Gravar'
-    OnClick = btnGravarClick
-    ExplicitLeft = 584
-    ExplicitTop = 249
-    ExplicitHeight = 31
-  end
-  object btnCancelar: TSpeedButton
     Left = 586
     Top = 385
     Width = 92
     Height = 30
     Align = alRight
-    Caption = '&Cancelar'
+    Caption = '&Gravar'
+    Enabled = False
+    OnClick = btnGravarClick
     ExplicitLeft = 584
     ExplicitTop = 249
     ExplicitHeight = 31
@@ -47,8 +38,10 @@ object frmAluno: TfrmAluno
     ActivePage = tbsCadastro
     Align = alTop
     TabOrder = 0
+    ExplicitTop = -6
     object tbsCadastro: TTabSheet
       Caption = 'Cadastro'
+      OnShow = tbsCadastroShow
       object lblMatricula: TLabel
         Left = 3
         Top = 3
@@ -131,6 +124,8 @@ object frmAluno: TfrmAluno
         Top = 19
         Width = 121
         Height = 23
+        MaxLength = 9
+        NumbersOnly = True
         TabOrder = 0
       end
       object edtNome: TEdit
@@ -231,8 +226,8 @@ object frmAluno: TfrmAluno
           'TO')
       end
       object memObservacoes: TMemo
-        Left = 3
-        Top = 233
+        Left = 4
+        Top = 235
         Width = 663
         Height = 117
         TabOrder = 11
@@ -257,11 +252,29 @@ object frmAluno: TfrmAluno
     object tbsResultado: TTabSheet
       Caption = 'Resultado'
       ImageIndex = 1
+      OnShow = tbsResultadoShow
+      object lblTotalAlunos: TLabel
+        Left = 0
+        Top = 340
+        Width = 670
+        Height = 15
+        Align = alBottom
+        Alignment = taRightJustify
+        Caption = '0 Registros '
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ExplicitLeft = 605
+        ExplicitWidth = 65
+      end
       object dbgResultado: TDBGrid
         Left = 0
         Top = 0
         Width = 670
-        Height = 355
+        Height = 340
         Align = alClient
         DataSource = DM.dsrAluno
         Font.Charset = DEFAULT_CHARSET
@@ -271,6 +284,7 @@ object frmAluno: TfrmAluno
         Font.Style = []
         Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
         ParentFont = False
+        PopupMenu = popResultado
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
@@ -348,6 +362,14 @@ object frmAluno: TfrmAluno
             Visible = True
           end>
       end
+    end
+  end
+  object popResultado: TPopupMenu
+    Left = 508
+    Top = 138
+    object Excluiraluno1: TMenuItem
+      Caption = 'Excluir aluno'
+      OnClick = Excluiraluno1Click
     end
   end
 end

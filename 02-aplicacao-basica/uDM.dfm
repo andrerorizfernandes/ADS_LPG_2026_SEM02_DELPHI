@@ -19,6 +19,11 @@ object DM: TDM
         Size = 11
       end
       item
+        Name = 'Sexo'
+        DataType = ftString
+        Size = 1
+      end
+      item
         Name = 'Endereco'
         DataType = ftString
         Size = 100
@@ -75,10 +80,8 @@ object DM: TDM
       Size = 11
     end
     object cdsAlunoSexo: TStringField
-      FieldKind = fkCalculated
       FieldName = 'Sexo'
       Size = 1
-      Calculated = True
     end
     object cdsAlunoEndereco: TStringField
       FieldName = 'Endereco'

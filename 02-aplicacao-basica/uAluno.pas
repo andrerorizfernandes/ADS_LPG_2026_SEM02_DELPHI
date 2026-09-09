@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.Buttons, Vcl.StdCtrls,
-  Vcl.ExtCtrls, Data.DB, Vcl.Grids, Vcl.DBGrids, uDM;
+  Vcl.ExtCtrls, Data.DB, Vcl.Grids, Vcl.DBGrids, uDM, Vcl.Menus;
 
 type
   TfrmAluno = class(TForm)
@@ -13,7 +13,6 @@ type
     tbsCadastro: TTabSheet;
     tbsResultado: TTabSheet;
     btnGravar: TSpeedButton;
-    btnCancelar: TSpeedButton;
     lblMatricula: TLabel;
     edtMatricula: TEdit;
     edtNome: TEdit;
@@ -38,14 +37,27 @@ type
     memObservacoes: TMemo;
     rdgEstadoCivil: TRadioGroup;
     dbgResultado: TDBGrid;
+    popResultado: TPopupMenu;
+    Excluiraluno1: TMenuItem;
+    lblTotalAlunos: TLabel;
     procedure FormActivate(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure tbsCadastroShow(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure tbsResultadoShow(Sender: TObject);
+    procedure Excluiraluno1Click(Sender: TObject);
   private
     procedure PrepararAmbiente;
     procedure EncerrarAmbiente;
     procedure CadastrarAluno;
     procedure LimparCampos;
+    procedure CriarEstruturaDeDados;
+    procedure PrepararParaInserirNovoAluno;
+    procedure PrepararParaVisualizarResultados;
+    procedure ExcluirAluno;
+    procedure TotalizadorDeAlunos;
+
     function ValidarCamposObrigatorios: Boolean;
     function RetornarSexoSelecionado(const IndiceSelecionado: Integer): string;
     function RetornarEstadoCivilSelecionado(const IndiceSelecionado: Integer): string;
@@ -89,14 +101,38 @@ begin
 
   tbsResultado.TabVisible := True;
   pgcAluno.ActivePage := tbsResultado;
+  TotalizadorDeAlunos;
   LimparCampos;
+end;
 
-  DM.cdsAluno.Append;
+procedure TfrmAluno.CriarEstruturaDeDados;
+begin
+  if (not DM.cdsAluno.Active) then
+    DM.cdsAluno.CreateDataSet;
+
+  DM.cdsAluno.Open;
 end;
 
 procedure TfrmAluno.EncerrarAmbiente;
 begin
   DM.cdsAluno.Close;
+end;
+
+procedure TfrmAluno.ExcluirAluno;
+begin
+  if (not DM.cdsAluno.Active) then
+    Exit;
+
+  if (DM.cdsAluno.IsEmpty) then
+    Exit;
+
+  DM.cdsAluno.Delete;
+  TotalizadorDeAlunos;
+end;
+
+procedure TfrmAluno.Excluiraluno1Click(Sender: TObject);
+begin
+  ExcluirAluno;
 end;
 
 procedure TfrmAluno.FormActivate(Sender: TObject);
@@ -107,6 +143,11 @@ end;
 procedure TfrmAluno.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   EncerrarAmbiente;
+end;
+
+procedure TfrmAluno.FormCreate(Sender: TObject);
+begin
+  CriarEstruturaDeDados;
 end;
 
 procedure TfrmAluno.LimparCampos;
@@ -127,17 +168,35 @@ end;
 
 procedure TfrmAluno.PrepararAmbiente;
 begin
-  Caption := 'Cadastrar novo aluno';
-
-  if (not DM.cdsAluno.Active) then
-    DM.cdsAluno.CreateDataSet;
-
-  DM.cdsAluno.Open;
-  DM.cdsAluno.Append;
-
   tbsResultado.TabVisible := False;
   tbsCadastro.SetFocus;
   edtMatricula.SetFocus;
+end;
+
+procedure TfrmAluno.PrepararParaInserirNovoAluno;
+begin
+  if (not DM.cdsAluno.Active) then
+    Exit;
+
+  if (DM.cdsAluno.State = dsInsert) then
+    Exit;
+
+  DM.cdsAluno.Append;
+
+  btnGravar.Enabled := True;
+
+  Caption := 'Cadastrar novo aluno';
+end;
+
+procedure TfrmAluno.PrepararParaVisualizarResultados;
+begin
+  if (DM.cdsAluno.State = dsInsert) then
+    DM.cdsAluno.Cancel;
+
+  btnGravar.Enabled := False;
+
+  LimparCampos;
+  Caption := 'Alunos';
 end;
 
 function TfrmAluno.RetornarEstadoCivilSelecionado(
@@ -163,6 +222,28 @@ begin
     1: Exit('M');
     2: Exit('N');
   end;
+end;
+
+procedure TfrmAluno.tbsCadastroShow(Sender: TObject);
+begin
+  PrepararParaInserirNovoAluno;
+end;
+
+procedure TfrmAluno.tbsResultadoShow(Sender: TObject);
+begin
+  PrepararParaVisualizarResultados;
+end;
+
+procedure TfrmAluno.TotalizadorDeAlunos;
+begin
+  if (not DM.cdsAluno.Active) then
+    Exit;
+
+  var lInformacao := DM.cdsAluno.RecordCount.ToString + ' Alunos ';
+  if (DM.cdsAluno.RecordCount = 1) then
+    lInformacao := DM.cdsAluno.RecordCount.ToString + ' Aluno ';
+
+  lblTotalAlunos.Caption := lInformacao;
 end;
 
 function TfrmAluno.ValidarCamposObrigatorios: Boolean;
