@@ -68,6 +68,9 @@ type
 
 implementation
 
+uses
+  uLib;
+
 {$R *.dfm}
 
 procedure TfrmAluno.btnGravarClick(Sender: TObject);
@@ -142,6 +145,7 @@ end;
 
 procedure TfrmAluno.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+  SalvarDadosClientDataSet(DM.cdsAluno);
   EncerrarAmbiente;
 end;
 
@@ -168,9 +172,23 @@ end;
 
 procedure TfrmAluno.PrepararAmbiente;
 begin
-  tbsResultado.TabVisible := False;
-  tbsCadastro.SetFocus;
-  edtMatricula.SetFocus;
+  RecuperarDadosDoXmlParaClientDataSet(
+    DM.cdsAluno,
+    RecuperarCaminhoCompletoDoXml(DM.cdsAluno));
+
+  if DM.cdsAluno.IsEmpty then
+    begin
+      tbsResultado.TabVisible := False;
+      tbsCadastro.SetFocus;
+      edtMatricula.SetFocus;
+    end
+  else
+    begin
+      tbsResultado.TabVisible := True;
+      pgcAluno.ActivePage := tbsResultado;
+      tbsResultado.SetFocus;
+      TotalizadorDeAlunos;
+    end;
 end;
 
 procedure TfrmAluno.PrepararParaInserirNovoAluno;

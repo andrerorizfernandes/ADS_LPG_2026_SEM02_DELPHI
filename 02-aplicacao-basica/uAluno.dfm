@@ -38,7 +38,6 @@ object frmAluno: TfrmAluno
     ActivePage = tbsCadastro
     Align = alTop
     TabOrder = 0
-    ExplicitTop = -6
     object tbsCadastro: TTabSheet
       Caption = 'Cadastro'
       OnShow = tbsCadastroShow

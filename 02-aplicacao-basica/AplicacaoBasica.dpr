@@ -4,7 +4,8 @@ uses
   Vcl.Forms,
   uPrincipal in 'uPrincipal.pas' {frmPrincipal},
   uAluno in 'uAluno.pas' {frmAluno},
-  uDM in 'uDM.pas' {DM: TDataModule};
+  uDM in 'uDM.pas' {DM: TDataModule},
+  uLib in 'uLib.pas';
 
 {$R *.res}
 
