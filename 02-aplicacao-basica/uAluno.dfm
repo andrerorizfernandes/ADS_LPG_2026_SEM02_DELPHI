@@ -139,6 +139,8 @@ object frmAluno: TfrmAluno
         Top = 19
         Width = 107
         Height = 23
+        MaxLength = 11
+        NumbersOnly = True
         TabOrder = 2
       end
       object cboSexo: TComboBox
@@ -290,6 +292,7 @@ object frmAluno: TfrmAluno
         TitleFont.Height = -12
         TitleFont.Name = 'Segoe UI'
         TitleFont.Style = [fsBold]
+        OnDrawColumnCell = dbgResultadoDrawColumnCell
         Columns = <
           item
             Expanded = False

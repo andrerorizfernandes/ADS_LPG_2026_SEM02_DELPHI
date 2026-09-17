@@ -47,6 +47,8 @@ type
     procedure FormCreate(Sender: TObject);
     procedure tbsResultadoShow(Sender: TObject);
     procedure Excluiraluno1Click(Sender: TObject);
+    procedure dbgResultadoDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
   private
     procedure PrepararAmbiente;
     procedure EncerrarAmbiente;
@@ -59,6 +61,7 @@ type
     procedure TotalizadorDeAlunos;
 
     function ValidarCamposObrigatorios: Boolean;
+    function ValidarEstruturaCpf: Boolean;
     function RetornarSexoSelecionado(const IndiceSelecionado: Integer): string;
     function RetornarEstadoCivilSelecionado(const IndiceSelecionado: Integer): string;
     { Private declarations }
@@ -75,8 +78,13 @@ uses
 
 procedure TfrmAluno.btnGravarClick(Sender: TObject);
 begin
-  if ValidarCamposObrigatorios then
-    CadastrarAluno;
+  if (not ValidarCamposObrigatorios) then
+    Exit;
+
+  if (not ValidarEstruturaCpf) then
+    Exit;
+
+  CadastrarAluno;
 end;
 
 procedure TfrmAluno.CadastrarAluno;
@@ -98,13 +106,14 @@ begin
     DM.cdsAluno.Post;
   except
     on E: Exception do
-      ShowMessage('Ocorreu um erro ao gravar os dados.' + sLineBreak +
+      Erro('Ocorreu um erro ao gravar os dados.' + sLineBreak +
         'Erro original: ' + E.Message);
   end;
 
   tbsResultado.TabVisible := True;
   pgcAluno.ActivePage := tbsResultado;
   TotalizadorDeAlunos;
+  AjustarColunas(dbgResultado);
   LimparCampos;
 end;
 
@@ -114,6 +123,12 @@ begin
     DM.cdsAluno.CreateDataSet;
 
   DM.cdsAluno.Open;
+end;
+
+procedure TfrmAluno.dbgResultadoDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  ZebrarGrid(Sender, DM.cdsAluno, Rect, Column, State);
 end;
 
 procedure TfrmAluno.EncerrarAmbiente;
@@ -145,7 +160,7 @@ end;
 
 procedure TfrmAluno.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  SalvarDadosClientDataSet(DM.cdsAluno);
+  SalvarDadosClientDataSetParaXml(DM.cdsAluno);
   EncerrarAmbiente;
 end;
 
@@ -188,6 +203,7 @@ begin
       pgcAluno.ActivePage := tbsResultado;
       tbsResultado.SetFocus;
       TotalizadorDeAlunos;
+      AjustarColunas(dbgResultado);
     end;
 end;
 
@@ -268,43 +284,64 @@ function TfrmAluno.ValidarCamposObrigatorios: Boolean;
 begin
   if Trim(edtMatricula.Text).IsEmpty then
   begin
-    ShowMessage('Informe a matrícula.');
+    Alerta('Informe a matrícula.');
     edtMatricula.SetFocus;
     Exit(False);
   end;
 
   if Trim(edtNome.Text).IsEmpty then
   begin
-    ShowMessage('Informe o nome.');
+    Alerta('Informe o nome.');
     edtNome.SetFocus;
     Exit(False);
   end;
 
   if Trim(edtCpf.Text).IsEmpty then
   begin
-    ShowMessage('Informe o cpf.');
+    Alerta('Informe o cpf.');
     edtCpf.SetFocus;
     Exit(False);
   end;
 
   if Trim(edtEndereco.Text).IsEmpty then
   begin
-    ShowMessage('Informe o endereço.');
+    Alerta('Informe o endereço.');
     edtEndereco.SetFocus;
     Exit(False);
   end;
 
   if Trim(edtMunicipio.Text).IsEmpty then
   begin
-    ShowMessage('Informe o município.');
+    Alerta('Informe o município.');
     edtMunicipio.SetFocus;
     Exit(False);
   end;
 
   if (cboUf.ItemIndex = -1) then
   begin
-    ShowMessage('Selecione a Uf.');
+    Alerta('Selecione a Uf.');
     cboUf.SetFocus;
+    Exit(False);
+  end;
+
+  Result := True;
+end;
+
+function TfrmAluno.ValidarEstruturaCpf: Boolean;
+begin
+  var CpfInformado := Trim(edtCpf.Text);
+
+  if (CpfInformado.Length <> 11) then
+  begin
+    Alerta('O cpf deve ter 11 caracteres.');
+    edtCpf.SetFocus;
+    Exit(False);
+  end;
+
+  if (not ValidarCPF(CpfInformado)) then
+  begin
+    Alerta('O cpf informado é inválido.');
+    edtCpf.SetFocus;
     Exit(False);
   end;
 
