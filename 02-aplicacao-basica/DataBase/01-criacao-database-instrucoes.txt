@@ -1,0 +1,125 @@
+# Criar um banco de dados Firebird 5.0 pelo ISQL
+
+Quando a criação do banco pelo DBeaver apresentar o erro `Cannot prepare a CREATE DATABASE/SCHEMA statement`, utilize o **ISQL**, 
+ferramenta que acompanha a instalação do Firebird.
+
+## 1. Abra o Prompt de Comando
+
+Abra o **Prompt de Comando (CMD)**.
+
+Acesse a pasta de instalação do Firebird:
+
+```text
+C:\Program Files (x86)\Firebird\Firebird_5_0
+```
+
+No CMD:
+
+```bat
+cd "C:\Program Files (x86)\Firebird\Firebird_5_0"
+```
+
+## 2. Execute o ISQL
+
+Digite:
+
+```bat
+isql.exe -user SYSDBA -password masterkey
+```
+
+Substitua `masterkey` pela senha do usuário `SYSDBA`, caso tenha sido definida outra senha durante a instalação.
+
+Se a conexão for aceita, será exibido:
+
+```text
+Use CONNECT or CREATE DATABASE to specify a database
+SQL>
+```
+
+## 3. Crie o banco de dados
+
+No prompt `SQL>`, execute:
+
+```sql
+CREATE DATABASE 'C:\Dados\MeuBanco.fdb';
+```
+
+Altere o caminho e o nome do arquivo conforme necessário.
+
+Por exemplo:
+
+```sql
+CREATE DATABASE 'C:\Projetos\Banco\Sistema.fdb';
+```
+
+A pasta informada deve existir antes da execução.
+
+## 4. Verifique a criação
+
+Após executar o comando, o arquivo `.fdb` será criado no caminho informado.
+
+Por exemplo:
+
+```text
+C:\Dados\MeuBanco.fdb
+```
+
+## 5. Saia do ISQL
+
+Depois de criar o banco:
+
+```sql
+QUIT;
+```
+
+## 6. Conecte o banco pelo DBeaver
+
+Agora que o arquivo `.fdb` já existe, crie uma conexão Firebird no DBeaver.
+
+Informe:
+
+```text
+Host: localhost
+Porta: 3050
+Banco de dados: C:\Dados\MeuBanco.fdb
+Usuário: SYSDBA
+Senha: a senha do SYSDBA
+```
+
+Teste a conexão.
+
+## Observação importante
+
+Não execute o comando:
+
+```sql
+CREATE DATABASE ...
+```
+
+pelo SQL Editor normal do DBeaver quando ele apresentar o erro:
+
+```text
+Cannot prepare a CREATE DATABASE/SCHEMA statement
+```
+
+Nesse ambiente, utilize o **ISQL para criar o banco** e o **DBeaver para administrar e trabalhar com o banco depois de criado**.
+
+### Resumo rápido
+
+```bat
+cd "C:\Program Files (x86)\Firebird\Firebird_5_0"
+
+isql.exe -user SYSDBA -password masterkey
+```
+
+Depois, no `SQL>`:
+
+```sql
+CREATE DATABASE 'C:\Dados\MeuBanco.fdb';
+```
+
+E finalmente:
+
+```sql
+QUIT;
+```
