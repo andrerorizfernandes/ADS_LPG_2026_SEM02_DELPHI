@@ -1,124 +1,126 @@
 object DM: TDM
   Height = 480
   Width = 640
-  object cdsAluno: TClientDataSet
-    Aggregates = <>
-    FieldDefs = <
-      item
-        Name = 'Matricula'
-        DataType = ftInteger
-      end
-      item
-        Name = 'Nome'
-        DataType = ftString
-        Size = 60
-      end
-      item
-        Name = 'Cpf'
-        DataType = ftString
-        Size = 11
-      end
-      item
-        Name = 'Sexo'
-        DataType = ftString
-        Size = 1
-      end
-      item
-        Name = 'Endereco'
-        DataType = ftString
-        Size = 100
-      end
-      item
-        Name = 'Numero'
-        DataType = ftString
-        Size = 10
-      end
-      item
-        Name = 'Complemento'
-        DataType = ftString
-        Size = 50
-      end
-      item
-        Name = 'Bairro'
-        DataType = ftString
-        Size = 50
-      end
-      item
-        Name = 'Municipio'
-        DataType = ftString
-        Size = 50
-      end
-      item
-        Name = 'Uf'
-        DataType = ftString
-        Size = 2
-      end
-      item
-        Name = 'EstadoCivil'
-        DataType = ftString
-        Size = 1
-      end
-      item
-        Name = 'Observacoes'
-        DataType = ftString
-        Size = 1000
-      end>
-    IndexDefs = <>
-    Params = <>
-    StoreDefs = True
-    Left = 24
+  object dsrAluno: TDataSource
+    DataSet = qryAluno
+    Left = 112
+    Top = 104
+  end
+  object Conexao: TFDConnection
+    Params.Strings = (
+      
+        'Database=C:\Users\Andre Roriz\Downloads\ADS_LPG_2026_SEM02_DELPH' +
+        'I\02-aplicacao-basica\DataBase\DADOS.FDB'
+      'User_Name=SYSDBA'
+      'Password=18071988'
+      'DriverID=FB')
+    Connected = True
+    LoginPrompt = False
+    Left = 40
     Top = 24
-    object cdsAlunoMatricula: TIntegerField
-      FieldName = 'Matricula'
+  end
+  object qryAluno: TFDQuery
+    Connection = Conexao
+    SQL.Strings = (
+      'SELECT '
+      '  a.ID,'
+      '  a.MATRICULA,'
+      '  a.NOME,'
+      '  a.CPF,'
+      '  a.SEXO,'
+      '  a.ENDERECO,'
+      '  a.NUMERO,'
+      '  a.COMPLEMENTO,'
+      '  a.BAIRRO,'
+      '  a.MUNICIPIO,'
+      '  a.UF,'
+      '  a.ESTADOCIVIL,'
+      '  a.OBSERVACOES'
+      'FROM ALUNO a')
+    Left = 32
+    Top = 104
+    object qryAlunoID: TIntegerField
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Visible = False
     end
-    object cdsAlunoNome: TStringField
-      FieldName = 'Nome'
+    object qryAlunoMATRICULA: TIntegerField
+      DisplayLabel = 'Matr'#237'cula'
+      FieldName = 'MATRICULA'
+      Origin = 'MATRICULA'
+      Required = True
+    end
+    object qryAlunoNOME: TStringField
+      DisplayLabel = 'Nome'
+      FieldName = 'NOME'
+      Origin = 'NOME'
+      Required = True
       Size = 60
     end
-    object cdsAlunoCpf: TStringField
-      FieldName = 'Cpf'
+    object qryAlunoCPF: TStringField
+      DisplayLabel = 'Cpf'
+      FieldName = 'CPF'
+      Origin = 'CPF'
+      Required = True
       Size = 11
     end
-    object cdsAlunoSexo: TStringField
-      FieldName = 'Sexo'
+    object qryAlunoSEXO: TStringField
+      DisplayLabel = 'Sexo'
+      FieldName = 'SEXO'
+      Origin = 'SEXO'
       Size = 1
     end
-    object cdsAlunoEndereco: TStringField
-      FieldName = 'Endereco'
+    object qryAlunoENDERECO: TStringField
+      DisplayLabel = 'Endere'#231'o'
+      FieldName = 'ENDERECO'
+      Origin = 'ENDERECO'
+      Required = True
       Size = 100
     end
-    object cdsAlunoNumero: TStringField
-      FieldName = 'Numero'
+    object qryAlunoNUMERO: TStringField
+      DisplayLabel = 'N'#250'mero'
+      FieldName = 'NUMERO'
+      Origin = 'NUMERO'
       Size = 10
     end
-    object cdsAlunoComplemento: TStringField
-      FieldName = 'Complemento'
+    object qryAlunoCOMPLEMENTO: TStringField
+      DisplayLabel = 'Complemento'
+      FieldName = 'COMPLEMENTO'
+      Origin = 'COMPLEMENTO'
       Size = 50
     end
-    object cdsAlunoBairro: TStringField
-      FieldName = 'Bairro'
+    object qryAlunoBAIRRO: TStringField
+      DisplayLabel = 'Bairro'
+      FieldName = 'BAIRRO'
+      Origin = 'BAIRRO'
       Size = 50
     end
-    object cdsAlunoMunicipio: TStringField
-      FieldName = 'Municipio'
+    object qryAlunoMUNICIPIO: TStringField
+      DisplayLabel = 'Munic'#237'pio'
+      FieldName = 'MUNICIPIO'
+      Origin = 'MUNICIPIO'
+      Required = True
       Size = 50
     end
-    object cdsAlunoUf: TStringField
-      FieldName = 'Uf'
+    object qryAlunoUF: TStringField
+      DisplayLabel = 'Uf'
+      FieldName = 'UF'
+      Origin = 'UF'
+      Required = True
       Size = 2
     end
-    object cdsAlunoEstadoCivil: TStringField
-      FieldName = 'EstadoCivil'
+    object qryAlunoESTADOCIVIL: TStringField
+      DisplayLabel = 'Estado Civil'
+      FieldName = 'ESTADOCIVIL'
+      Origin = 'ESTADOCIVIL'
       Size = 1
     end
-    object cdsAlunoObservacoes: TStringField
-      FieldName = 'Observacoes'
+    object qryAlunoOBSERVACOES: TStringField
+      DisplayLabel = 'Observa'#231#245'es'
+      FieldName = 'OBSERVACOES'
+      Origin = 'OBSERVACOES'
       Size = 1000
     end
-  end
-  object dsrAluno: TDataSource
-    DataSet = cdsAluno
-    Left = 96
-    Top = 24
   end
 end

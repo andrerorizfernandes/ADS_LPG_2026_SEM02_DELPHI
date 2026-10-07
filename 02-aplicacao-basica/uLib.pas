@@ -10,9 +10,6 @@ procedure Alerta(Mensagem: string);
 procedure Informacao(Mensagem: string);
 procedure Erro(Mensagem: string);
 function Pergunta(Pergunta: string): Boolean;
-function RecuperarCaminhoCompletoDoXml(const DataSet: TClientDataSet): string;
-procedure SalvarDadosClientDataSetParaXml(const DataSet: TClientDataSet);
-procedure RecuperarDadosDoXmlParaClientDataSet(const DataSet: TClientDataSet; const CaminhoXml: string);
 procedure AjustarColunas(Grid: TDBGrid);
 procedure ZebrarGrid(Sender, DataSet: TObject; Rect: TRect; Column: TColumn; State: TGridDrawState);
 function RemoveCaracter(Texto: string): string;
@@ -49,50 +46,6 @@ begin
     Exit(True);
 
   Result := False;
-end;
-
-function RecuperarCaminhoCompletoDoXml(const DataSet: TClientDataSet): string;
-const
-  DIRETORIO_DADOS = 'Dados\';
-  EXTENSAO_XML = '.xml';
-begin
-  var lCaminhoArquivoDeDados := ExtractFilePath(ParamStr(0)) + DIRETORIO_DADOS;
-  ForceDirectories(lCaminhoArquivoDeDados);
-  Result := lCaminhoArquivoDeDados + DataSet.Name + EXTENSAO_XML
-end;
-
-procedure SalvarDadosClientDataSetParaXml(const DataSet: TClientDataSet);
-begin
-  if (not Assigned(DataSet)) then
-    Exit;
-
-  if (not DataSet.Active) then
-    Exit;
-
-  if DataSet.IsEmpty then
-    Exit;
-
-  DataSet.SaveToFile(
-    RecuperarCaminhoCompletoDoXml(DataSet),
-    dfXMLUTF8);
-end;
-
-procedure RecuperarDadosDoXmlParaClientDataSet(const DataSet: TClientDataSet; const CaminhoXml: string);
-begin
-  if (not Assigned(DataSet)) then
-    Exit;
-
-  if (not DataSet.Active) then
-    Exit;
-
-  if CaminhoXml.Trim.IsEmpty then
-    Exit;
-
-  if (not FileExists(CaminhoXml)) then
-    Exit;
-
-  DataSet.EmptyDataSet;
-  DataSet.LoadFromFile(CaminhoXml);
 end;
 
 procedure AjustarColunas(Grid: TDBGrid);

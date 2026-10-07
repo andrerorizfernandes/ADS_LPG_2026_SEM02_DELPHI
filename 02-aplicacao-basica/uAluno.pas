@@ -90,20 +90,20 @@ end;
 procedure TfrmAluno.CadastrarAluno;
 begin
   try
-    DM.cdsAlunoMatricula.AsInteger := StrToInt(edtMatricula.Text);
-    DM.cdsAlunoNome.AsString := edtNome.Text;
-    DM.cdsAlunoCpf.AsString := edtCpf.Text;
-    DM.cdsAlunoSexo.AsString := RetornarSexoSelecionado(cboSexo.ItemIndex);
-    DM.cdsAlunoEndereco.AsString := edtEndereco.Text;
-    DM.cdsAlunoNumero.AsString := edtNumero.Text;
-    DM.cdsAlunoComplemento.AsString := edtComplemento.Text;
-    DM.cdsAlunoBairro.AsString := edtBairro.Text;
-    DM.cdsAlunoMunicipio.AsString := edtMunicipio.Text;
-    DM.cdsAlunoUf.AsString := cboUf.Text;
-    DM.cdsAlunoEstadoCivil.AsString := RetornarEstadoCivilSelecionado(rdgEstadoCivil.ItemIndex);
-    DM.cdsAlunoObservacoes.AsString := memObservacoes.Text;
+    DM.qryAlunoMATRICULA.AsInteger := StrToInt(edtMatricula.Text);
+    DM.qryAlunoNOME.AsString := edtNome.Text;
+    DM.qryAlunoCPF.AsString := edtCpf.Text;
+    DM.qryAlunoSEXO.AsString := RetornarSexoSelecionado(cboSexo.ItemIndex);
+    DM.qryAlunoENDERECO.AsString := edtEndereco.Text;
+    DM.qryAlunoNUMERO.AsString := edtNumero.Text;
+    DM.qryAlunoCOMPLEMENTO.AsString := edtComplemento.Text;
+    DM.qryAlunoBAIRRO.AsString := edtBairro.Text;
+    DM.qryAlunoMUNICIPIO.AsString := edtMunicipio.Text;
+    DM.qryAlunoUF.AsString := cboUf.Text;
+    DM.qryAlunoESTADOCIVIL.AsString := RetornarEstadoCivilSelecionado(rdgEstadoCivil.ItemIndex);
+    DM.qryAlunoOBSERVACOES.AsString := memObservacoes.Text;
 
-    DM.cdsAluno.Post;
+    DM.qryAluno.Post;
   except
     on E: Exception do
       Erro('Ocorreu um erro ao gravar os dados.' + sLineBreak +
@@ -119,32 +119,30 @@ end;
 
 procedure TfrmAluno.CriarEstruturaDeDados;
 begin
-  if (not DM.cdsAluno.Active) then
-    DM.cdsAluno.CreateDataSet;
-
-  DM.cdsAluno.Open;
+  if (not DM.qryAluno.Active) then
+    DM.qryAluno.Open;
 end;
 
 procedure TfrmAluno.dbgResultadoDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
-  ZebrarGrid(Sender, DM.cdsAluno, Rect, Column, State);
+  ZebrarGrid(Sender, DM.qryAluno, Rect, Column, State);
 end;
 
 procedure TfrmAluno.EncerrarAmbiente;
 begin
-  DM.cdsAluno.Close;
+  DM.qryAluno.Close;
 end;
 
 procedure TfrmAluno.ExcluirAluno;
 begin
-  if (not DM.cdsAluno.Active) then
+  if (not DM.qryAluno.Active) then
     Exit;
 
-  if (DM.cdsAluno.IsEmpty) then
+  if (DM.qryAluno.IsEmpty) then
     Exit;
 
-  DM.cdsAluno.Delete;
+  DM.qryAluno.Delete;
   TotalizadorDeAlunos;
 end;
 
@@ -160,7 +158,6 @@ end;
 
 procedure TfrmAluno.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  SalvarDadosClientDataSetParaXml(DM.cdsAluno);
   EncerrarAmbiente;
 end;
 
@@ -187,11 +184,7 @@ end;
 
 procedure TfrmAluno.PrepararAmbiente;
 begin
-  RecuperarDadosDoXmlParaClientDataSet(
-    DM.cdsAluno,
-    RecuperarCaminhoCompletoDoXml(DM.cdsAluno));
-
-  if DM.cdsAluno.IsEmpty then
+  if DM.qryAluno.IsEmpty then
     begin
       tbsResultado.TabVisible := False;
       tbsCadastro.SetFocus;
@@ -209,13 +202,13 @@ end;
 
 procedure TfrmAluno.PrepararParaInserirNovoAluno;
 begin
-  if (not DM.cdsAluno.Active) then
+  if (not DM.qryAluno.Active) then
     Exit;
 
-  if (DM.cdsAluno.State = dsInsert) then
+  if (DM.qryAluno.State = dsInsert) then
     Exit;
 
-  DM.cdsAluno.Append;
+  DM.qryAluno.Append;
 
   btnGravar.Enabled := True;
 
@@ -224,8 +217,8 @@ end;
 
 procedure TfrmAluno.PrepararParaVisualizarResultados;
 begin
-  if (DM.cdsAluno.State = dsInsert) then
-    DM.cdsAluno.Cancel;
+  if (DM.qryAluno.State = dsInsert) then
+    DM.qryAluno.Cancel;
 
   btnGravar.Enabled := False;
 
@@ -270,12 +263,12 @@ end;
 
 procedure TfrmAluno.TotalizadorDeAlunos;
 begin
-  if (not DM.cdsAluno.Active) then
+  if (not DM.qryAluno.Active) then
     Exit;
 
-  var lInformacao := DM.cdsAluno.RecordCount.ToString + ' Alunos ';
-  if (DM.cdsAluno.RecordCount = 1) then
-    lInformacao := DM.cdsAluno.RecordCount.ToString + ' Aluno ';
+  var lInformacao := DM.qryAluno.RecordCount.ToString + ' Alunos ';
+  if (DM.qryAluno.RecordCount = 1) then
+    lInformacao := DM.qryAluno.RecordCount.ToString + ' Aluno ';
 
   lblTotalAlunos.Caption := lInformacao;
 end;

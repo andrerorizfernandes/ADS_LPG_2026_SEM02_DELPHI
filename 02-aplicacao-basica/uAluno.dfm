@@ -35,7 +35,7 @@ object frmAluno: TfrmAluno
     Top = 0
     Width = 678
     Height = 385
-    ActivePage = tbsCadastro
+    ActivePage = tbsResultado
     Align = alTop
     TabOrder = 0
     object tbsCadastro: TTabSheet
@@ -296,69 +296,65 @@ object frmAluno: TfrmAluno
         Columns = <
           item
             Expanded = False
-            FieldName = 'Matricula'
-            Title.Caption = 'Matr'#237'cula'
+            FieldName = 'MATRICULA'
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'Nome'
+            FieldName = 'NOME'
             Width = 228
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'Cpf'
+            FieldName = 'CPF'
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'Sexo'
+            FieldName = 'SEXO'
             Width = 43
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'Endereco'
-            Title.Caption = 'Endere'#231'o'
+            FieldName = 'ENDERECO'
             Width = 212
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'Numero'
-            Title.Caption = 'N'#250'mero'
+            FieldName = 'NUMERO'
             Width = 67
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'Complemento'
+            FieldName = 'COMPLEMENTO'
             Width = 64
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'Bairro'
+            FieldName = 'BAIRRO'
             Width = 64
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'Municipio'
-            Title.Caption = 'Munic'#237'pio'
+            FieldName = 'MUNICIPIO'
             Width = 141
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'Uf'
+            FieldName = 'UF'
             Width = 40
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'EstadoCivil'
+            FieldName = 'ESTADOCIVIL'
             Title.Caption = 'Estado civil'
             Width = 64
             Visible = True
