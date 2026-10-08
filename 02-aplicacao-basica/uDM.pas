@@ -28,6 +28,14 @@ type
     qryAlunoUF: TStringField;
     qryAlunoESTADOCIVIL: TStringField;
     qryAlunoOBSERVACOES: TStringField;
+    qryTurma: TFDQuery;
+    dsrTurma: TDataSource;
+    qryTurmaID: TIntegerField;
+    qryTurmaNOME: TStringField;
+    qryTurmaSIGLA: TStringField;
+    qryTurmaREPRESENTANTE: TStringField;
+    qryTurmaANO: TIntegerField;
+    qryTurmaDATAHORA: TSQLTimeStampField;
   private
     { Private declarations }
   public

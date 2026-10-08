@@ -123,4 +123,53 @@ object DM: TDM
       Size = 1000
     end
   end
+  object qryTurma: TFDQuery
+    Connection = Conexao
+    SQL.Strings = (
+      'SELECT'
+      '  t.ID,'
+      '  t.NOME,'
+      '  t.SIGLA,'
+      '  t.REPRESENTANTE,'
+      '  t.ANO,'
+      '  t.DATAHORA'
+      'FROM TURMA t ')
+    Left = 32
+    Top = 176
+    object qryTurmaID: TIntegerField
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+    end
+    object qryTurmaNOME: TStringField
+      FieldName = 'NOME'
+      Origin = 'NOME'
+      Required = True
+      Size = 100
+    end
+    object qryTurmaSIGLA: TStringField
+      FieldName = 'SIGLA'
+      Origin = 'SIGLA'
+      Required = True
+      Size = 5
+    end
+    object qryTurmaREPRESENTANTE: TStringField
+      FieldName = 'REPRESENTANTE'
+      Origin = 'REPRESENTANTE'
+      Size = 100
+    end
+    object qryTurmaANO: TIntegerField
+      FieldName = 'ANO'
+      Origin = 'ANO'
+    end
+    object qryTurmaDATAHORA: TSQLTimeStampField
+      FieldName = 'DATAHORA'
+      Origin = 'DATAHORA'
+    end
+  end
+  object dsrTurma: TDataSource
+    DataSet = qryTurma
+    Left = 112
+    Top = 176
+  end
 end

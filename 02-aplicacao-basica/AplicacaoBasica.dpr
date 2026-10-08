@@ -5,7 +5,8 @@ uses
   uPrincipal in 'uPrincipal.pas' {frmPrincipal},
   uAluno in 'uAluno.pas' {frmAluno},
   uDM in 'uDM.pas' {DM: TDataModule},
-  uLib in 'uLib.pas';
+  uLib in 'uLib.pas',
+  uListarTurma in 'uListarTurma.pas' {frmListarTurma};
 
 {$R *.res}
 

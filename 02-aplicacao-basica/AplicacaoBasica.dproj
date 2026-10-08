@@ -139,6 +139,10 @@
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="uLib.pas"/>
+        <DCCReference Include="uListarTurma.pas">
+            <Form>frmListarTurma</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

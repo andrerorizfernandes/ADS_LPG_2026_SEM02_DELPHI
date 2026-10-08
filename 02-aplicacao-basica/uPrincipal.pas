@@ -16,9 +16,11 @@ type
     stbRodape: TStatusBar;
     imgPrincipal: TImage;
     tmrPrincipal: TTimer;
+    urma1: TMenuItem;
     procedure tmrPrincipalTimer(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure Aluno1Click(Sender: TObject);
+    procedure urma1Click(Sender: TObject);
   private
     FHoraLogin: TTime;
 
@@ -26,6 +28,7 @@ type
     procedure CapturarHoraDoLogin;
     function TempoLogadoNoSistema(const HoraDoLogin: TTime): TTime;
     procedure AbrirTelaAluno;
+    procedure AbrirTelaTurma;
     { Private declarations }
   public
     { Public declarations }
@@ -38,7 +41,8 @@ implementation
 
 uses
   System.SysUtils,
-  uAluno;
+  uAluno,
+  uListarTurma;
 
 {$R *.dfm}
 
@@ -49,6 +53,16 @@ begin
     lTelaAluno.ShowModal;
   finally
     lTelaAluno.Free;
+  end;
+end;
+
+procedure TfrmPrincipal.AbrirTelaTurma;
+begin
+  var lTelaListarTurma := TfrmListarTurma.Create(nil);
+  try
+    lTelaListarTurma.ShowModal;
+  finally
+    lTelaListarTurma.Free;
   end;
 end;
 
@@ -86,5 +100,10 @@ end;
 procedure TfrmPrincipal.tmrPrincipalTimer(Sender: TObject);
 begin
   PreencherDadosDoRodape;
+end;
+
+procedure TfrmPrincipal.urma1Click(Sender: TObject);
+begin
+  AbrirTelaTurma;
 end;
 end.

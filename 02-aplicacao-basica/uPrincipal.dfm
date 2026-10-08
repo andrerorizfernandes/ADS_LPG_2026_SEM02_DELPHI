@@ -286,6 +286,10 @@ object frmPrincipal: TfrmPrincipal
         Caption = '&Aluno'
         OnClick = Aluno1Click
       end
+      object urma1: TMenuItem
+        Caption = '&Turma'
+        OnClick = urma1Click
+      end
     end
     object Sair1: TMenuItem
       Caption = '&Sair'
