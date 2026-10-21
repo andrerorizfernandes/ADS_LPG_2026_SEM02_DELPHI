@@ -4,7 +4,7 @@ interface
 
 uses
   DBClient, System.SysUtils, Vcl.DBGrids, Data.DB, Winapi.Windows, Vcl.Grids,
-  Vcl.Graphics;
+  Vcl.Graphics, FireDAC.Comp.Client, Vcl.StdCtrls;
 
 procedure Alerta(Mensagem: string);
 procedure Informacao(Mensagem: string);
@@ -16,6 +16,7 @@ function RemoveCaracter(Texto: string): string;
 function ValidarCPFCNPJ(CpfCnpj: string): Boolean;
 function ValidarCNPJ(CpfCnpj : string): Boolean;
 Function ValidarCPF(numero: string): Boolean;
+procedure AtualizarQuantidadeDeRegistros(Query: TFDQuery; ComponenteExibicao: TLabel);
 
 implementation
 
@@ -285,5 +286,15 @@ begin
   end;
 
   Result := True;
+end;
+
+procedure AtualizarQuantidadeDeRegistros(Query: TFDQuery; ComponenteExibicao: TLabel);
+begin
+  ComponenteExibicao.Caption := 'O Registros ';
+
+  if (not Query.Active) or Query.IsEmpty then
+    Exit;
+
+  ComponenteExibicao.Caption := Query.RecordCount.ToString + ' Registros ';
 end;
 end.

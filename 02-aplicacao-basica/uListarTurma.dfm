@@ -29,8 +29,7 @@ object frmListarTurma: TfrmListarTurma
     Font.Name = 'Segoe UI'
     Font.Style = [fsBold]
     ParentFont = False
-    ExplicitLeft = 547
-    ExplicitTop = 284
+    ExplicitLeft = 647
     ExplicitWidth = 65
   end
   object dbgTurma: TDBGrid
@@ -53,6 +52,7 @@ object frmListarTurma: TfrmListarTurma
     TitleFont.Height = -12
     TitleFont.Name = 'Segoe UI'
     TitleFont.Style = [fsBold]
+    OnDrawColumnCell = dbgTurmaDrawColumnCell
     Columns = <
       item
         Expanded = False
@@ -64,12 +64,14 @@ object frmListarTurma: TfrmListarTurma
         Expanded = False
         FieldName = 'SIGLA'
         Title.Caption = 'Sigla'
+        Width = 64
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'REPRESENTANTE'
         Title.Caption = 'Representante'
+        Width = 64
         Visible = True
       end
       item
@@ -87,8 +89,6 @@ object frmListarTurma: TfrmListarTurma
     Align = alBottom
     BevelInner = bvLowered
     TabOrder = 1
-    ExplicitTop = 309
-    ExplicitWidth = 612
     object btnExcluir: TBitBtn
       Left = 604
       Top = 2
@@ -97,8 +97,7 @@ object frmListarTurma: TfrmListarTurma
       Align = alRight
       Caption = 'E&xcluir'
       TabOrder = 2
-      ExplicitLeft = 504
-      ExplicitHeight = 31
+      OnClick = btnExcluirClick
     end
     object btnEditar: TBitBtn
       Left = 498
@@ -108,8 +107,6 @@ object frmListarTurma: TfrmListarTurma
       Align = alRight
       Caption = '&Editar'
       TabOrder = 1
-      ExplicitLeft = 504
-      ExplicitHeight = 31
     end
     object btnInserir: TBitBtn
       Left = 392
@@ -119,8 +116,6 @@ object frmListarTurma: TfrmListarTurma
       Align = alRight
       Caption = '&Inserir'
       TabOrder = 0
-      ExplicitLeft = 504
-      ExplicitHeight = 31
     end
   end
 end

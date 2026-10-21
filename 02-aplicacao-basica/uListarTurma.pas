@@ -16,8 +16,12 @@ type
     btnEditar: TBitBtn;
     btnInserir: TBitBtn;
     procedure FormActivate(Sender: TObject);
+    procedure dbgTurmaDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure btnExcluirClick(Sender: TObject);
   private
     procedure ListarTurmas;
+    procedure ExcluirTurma;
     { Private declarations }
   public
     { Public declarations }
@@ -31,17 +35,41 @@ uses
 
 {$R *.dfm}
 
+procedure TfrmListarTurma.btnExcluirClick(Sender: TObject);
+begin
+  ExcluirTurma;
+end;
+
+procedure TfrmListarTurma.dbgTurmaDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  ZebrarGrid(dbgTurma, DM.qryTurma, Rect, Column, State);
+end;
+
+procedure TfrmListarTurma.ExcluirTurma;
+const
+  MENSAGEM_CONFIRMACAO_EXCLUSAO = 'Deseja excluir a turma "%s"?';
+begin
+  if (not DM.qryTurma.Active) or DM.qryTurma.IsEmpty then
+    Exit;
+
+  if (not Pergunta(Format(MENSAGEM_CONFIRMACAO_EXCLUSAO, [DM.qryTurmaNOME.AsString]))) then
+    Exit;
+
+  DM.qryTurma.Delete;
+  AtualizarQuantidadeDeRegistros(DM.qryTurma, lblTotalizador);
+end;
+
 procedure TfrmListarTurma.FormActivate(Sender: TObject);
 begin
   ListarTurmas;
+  AjustarColunas(dbgTurma);
+  AtualizarQuantidadeDeRegistros(DM.qryTurma, lblTotalizador);
 end;
 
 procedure TfrmListarTurma.ListarTurmas;
 begin
   if (not DM.qryTurma.Active) then
-  begin
     DM.qryTurma.Open;
-    AjustarColunas(dbgTurma);
-  end;
 end;
 end.
