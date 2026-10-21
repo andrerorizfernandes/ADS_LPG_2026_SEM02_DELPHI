@@ -143,6 +143,10 @@
             <Form>frmListarTurma</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="uTurma.pas">
+            <Form>frmTurma</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
