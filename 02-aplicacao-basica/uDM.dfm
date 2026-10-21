@@ -132,8 +132,10 @@ object DM: TDM
       '  t.SIGLA,'
       '  t.REPRESENTANTE,'
       '  t.ANO,'
-      '  t.DATAHORA'
-      'FROM TURMA t ')
+      '  t.DATAHORA,'
+      '  t.EXCLUIDO'
+      'FROM TURMA t '
+      'WHERE (t.Excluido = false)')
     Left = 32
     Top = 176
     object qryTurmaID: TIntegerField
@@ -165,6 +167,11 @@ object DM: TDM
     object qryTurmaDATAHORA: TSQLTimeStampField
       FieldName = 'DATAHORA'
       Origin = 'DATAHORA'
+    end
+    object qryTurmaEXCLUIDO: TBooleanField
+      FieldName = 'EXCLUIDO'
+      Origin = 'EXCLUIDO'
+      Required = True
     end
   end
   object dsrTurma: TDataSource

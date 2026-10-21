@@ -36,6 +36,7 @@ type
     qryTurmaREPRESENTANTE: TStringField;
     qryTurmaANO: TIntegerField;
     qryTurmaDATAHORA: TSQLTimeStampField;
+    qryTurmaEXCLUIDO: TBooleanField;
   private
     { Private declarations }
   public

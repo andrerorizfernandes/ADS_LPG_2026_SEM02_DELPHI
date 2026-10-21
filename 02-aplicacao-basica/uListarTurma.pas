@@ -56,7 +56,11 @@ begin
   if (not Pergunta(Format(MENSAGEM_CONFIRMACAO_EXCLUSAO, [DM.qryTurmaNOME.AsString]))) then
     Exit;
 
-  DM.qryTurma.Delete;
+  DM.qryTurma.Edit;
+  DM.qryTurmaEXCLUIDO.Value := True;
+  DM.qryTurma.Post;
+
+  DM.qryTurma.Refresh;
   AtualizarQuantidadeDeRegistros(DM.qryTurma, lblTotalizador);
 end;
 
