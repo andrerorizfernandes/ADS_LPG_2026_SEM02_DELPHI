@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.StdCtrls, Vcl.ExtCtrls,
-  Vcl.Grids, Vcl.DBGrids, Vcl.Buttons;
+  Vcl.Grids, Vcl.DBGrids, Vcl.Buttons, uLib;
 
 type
   TfrmListarTurma = class(TForm)
@@ -25,7 +25,7 @@ type
   private
     procedure ListarTurmas;
     procedure ExcluirTurma;
-    procedure AbrirTelaTurma(const Alterando: Boolean);
+    procedure AbrirTelaTurma(const Operacao: TOperacao);
     { Private declarations }
   public
     { Public declarations }
@@ -35,16 +35,15 @@ implementation
 
 uses
   uDM,
-  uLib,
   uTurma;
 
 {$R *.dfm}
 
-procedure TfrmListarTurma.AbrirTelaTurma(const Alterando: Boolean);
+procedure TfrmListarTurma.AbrirTelaTurma(const Operacao: TOperacao);
 begin
   var lTelaTurma := TfrmTurma.Create(nil);
   try
-    lTelaTurma.FAlterando := Alterando;
+    lTelaTurma.Operacao := Operacao;
     lTelaTurma.ShowModal;
   finally
     lTelaTurma.Free;
@@ -58,17 +57,17 @@ end;
 
 procedure TfrmListarTurma.btnEditarClick(Sender: TObject);
 begin
-  AbrirTelaTurma(True);
+  AbrirTelaTurma(topEditar);
 end;
 
 procedure TfrmListarTurma.btnInserirClick(Sender: TObject);
 begin
-  AbrirTelaTurma(False);
+  AbrirTelaTurma(topInserir);
 end;
 
 procedure TfrmListarTurma.dbgTurmaDblClick(Sender: TObject);
 begin
-  AbrirTelaTurma(True);
+  AbrirTelaTurma(topEditar);
 end;
 
 procedure TfrmListarTurma.dbgTurmaDrawColumnCell(Sender: TObject;

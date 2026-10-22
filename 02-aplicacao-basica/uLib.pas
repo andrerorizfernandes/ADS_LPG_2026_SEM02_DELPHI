@@ -6,6 +6,9 @@ uses
   DBClient, System.SysUtils, Vcl.DBGrids, Data.DB, Winapi.Windows, Vcl.Grids,
   Vcl.Graphics, FireDAC.Comp.Client, Vcl.StdCtrls;
 
+type
+  TOperacao = (topInserir, topEditar);
+
 procedure Alerta(Mensagem: string);
 procedure Informacao(Mensagem: string);
 procedure Erro(Mensagem: string);
