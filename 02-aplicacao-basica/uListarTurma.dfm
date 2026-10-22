@@ -53,6 +53,7 @@ object frmListarTurma: TfrmListarTurma
     TitleFont.Name = 'Segoe UI'
     TitleFont.Style = [fsBold]
     OnDrawColumnCell = dbgTurmaDrawColumnCell
+    OnDblClick = dbgTurmaDblClick
     Columns = <
       item
         Expanded = False
@@ -107,6 +108,9 @@ object frmListarTurma: TfrmListarTurma
       Align = alRight
       Caption = '&Editar'
       TabOrder = 1
+      OnClick = btnEditarClick
+      ExplicitLeft = 504
+      ExplicitTop = -9
     end
     object btnInserir: TBitBtn
       Left = 392
@@ -116,6 +120,7 @@ object frmListarTurma: TfrmListarTurma
       Align = alRight
       Caption = '&Inserir'
       TabOrder = 0
+      OnClick = btnInserirClick
     end
   end
 end

@@ -19,9 +19,13 @@ type
     procedure dbgTurmaDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure btnExcluirClick(Sender: TObject);
+    procedure btnInserirClick(Sender: TObject);
+    procedure btnEditarClick(Sender: TObject);
+    procedure dbgTurmaDblClick(Sender: TObject);
   private
     procedure ListarTurmas;
     procedure ExcluirTurma;
+    procedure AbrirTelaTurma(const Alterando: Boolean);
     { Private declarations }
   public
     { Public declarations }
@@ -31,13 +35,40 @@ implementation
 
 uses
   uDM,
-  uLib;
+  uLib,
+  uTurma;
 
 {$R *.dfm}
+
+procedure TfrmListarTurma.AbrirTelaTurma(const Alterando: Boolean);
+begin
+  var lTelaTurma := TfrmTurma.Create(nil);
+  try
+    lTelaTurma.FAlterando := Alterando;
+    lTelaTurma.ShowModal;
+  finally
+    lTelaTurma.Free;
+  end;
+end;
 
 procedure TfrmListarTurma.btnExcluirClick(Sender: TObject);
 begin
   ExcluirTurma;
+end;
+
+procedure TfrmListarTurma.btnEditarClick(Sender: TObject);
+begin
+  AbrirTelaTurma(True);
+end;
+
+procedure TfrmListarTurma.btnInserirClick(Sender: TObject);
+begin
+  AbrirTelaTurma(False);
+end;
+
+procedure TfrmListarTurma.dbgTurmaDblClick(Sender: TObject);
+begin
+  AbrirTelaTurma(True);
 end;
 
 procedure TfrmListarTurma.dbgTurmaDrawColumnCell(Sender: TObject;

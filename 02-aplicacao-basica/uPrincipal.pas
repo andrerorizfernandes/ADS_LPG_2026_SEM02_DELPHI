@@ -28,7 +28,7 @@ type
     procedure CapturarHoraDoLogin;
     function TempoLogadoNoSistema(const HoraDoLogin: TTime): TTime;
     procedure AbrirTelaAluno;
-    procedure AbrirTelaTurma;
+    procedure AbrirTelaListagemTurma;
     { Private declarations }
   public
     { Public declarations }
@@ -56,7 +56,7 @@ begin
   end;
 end;
 
-procedure TfrmPrincipal.AbrirTelaTurma;
+procedure TfrmPrincipal.AbrirTelaListagemTurma;
 begin
   var lTelaListarTurma := TfrmListarTurma.Create(nil);
   try
@@ -104,6 +104,6 @@ end;
 
 procedure TfrmPrincipal.urma1Click(Sender: TObject);
 begin
-  AbrirTelaTurma;
+  AbrirTelaListagemTurma;
 end;
 end.

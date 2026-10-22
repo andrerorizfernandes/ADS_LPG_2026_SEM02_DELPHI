@@ -171,7 +171,6 @@ object DM: TDM
     object qryTurmaEXCLUIDO: TBooleanField
       FieldName = 'EXCLUIDO'
       Origin = 'EXCLUIDO'
-      Required = True
     end
   end
   object dsrTurma: TDataSource
