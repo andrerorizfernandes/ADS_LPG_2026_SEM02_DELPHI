@@ -20,6 +20,8 @@ type
     dbeRepresentante: TDBEdit;
     dbeSigla: TDBEdit;
     dbeAno: TDBEdit;
+    dblModalidade: TDBLookupComboBox;
+    lblModalidade: TLabel;
     procedure FormActivate(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);

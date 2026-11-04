@@ -14,6 +14,7 @@ object frmListarTurma: TfrmListarTurma
   Font.Style = []
   Position = poScreenCenter
   OnActivate = FormActivate
+  OnClose = FormClose
   TextHeight = 15
   object lblTotalizador: TLabel
     Left = 0
@@ -65,20 +66,24 @@ object frmListarTurma: TfrmListarTurma
         Expanded = False
         FieldName = 'SIGLA'
         Title.Caption = 'Sigla'
-        Width = 64
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'REPRESENTANTE'
         Title.Caption = 'Representante'
-        Width = 64
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'ANO'
         Title.Caption = 'Ano'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'MODALIDADE'
+        Title.Caption = 'Modalidade'
         Visible = True
       end>
   end
@@ -109,8 +114,6 @@ object frmListarTurma: TfrmListarTurma
       Caption = '&Editar'
       TabOrder = 1
       OnClick = btnEditarClick
-      ExplicitLeft = 504
-      ExplicitTop = -9
     end
     object btnInserir: TBitBtn
       Left = 392

@@ -4,7 +4,7 @@ object frmTurma: TfrmTurma
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Turma'
-  ClientHeight = 142
+  ClientHeight = 179
   ClientWidth = 514
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -19,7 +19,7 @@ object frmTurma: TfrmTurma
     Left = 0
     Top = 0
     Width = 514
-    Height = 113
+    Height = 153
     Align = alTop
     TabOrder = 0
     object lblNome: TLabel
@@ -31,7 +31,7 @@ object frmTurma: TfrmTurma
     end
     object lblRepresentante: TLabel
       Left = 9
-      Top = 62
+      Top = 58
       Width = 75
       Height = 15
       Caption = 'Representante'
@@ -45,10 +45,17 @@ object frmTurma: TfrmTurma
     end
     object lblAno: TLabel
       Left = 431
-      Top = 62
+      Top = 58
       Width = 22
       Height = 15
       Caption = 'Ano'
+    end
+    object lblModalidade: TLabel
+      Left = 9
+      Top = 106
+      Width = 63
+      Height = 15
+      Caption = 'Modalidade'
     end
     object dbeNome: TDBEdit
       Left = 9
@@ -61,7 +68,7 @@ object frmTurma: TfrmTurma
     end
     object dbeRepresentante: TDBEdit
       Left = 9
-      Top = 79
+      Top = 75
       Width = 416
       Height = 23
       DataField = 'REPRESENTANTE'
@@ -87,7 +94,7 @@ object frmTurma: TfrmTurma
     end
     object dbeAno: TDBEdit
       Left = 431
-      Top = 79
+      Top = 75
       Width = 74
       Height = 23
       DataField = 'ANO'
@@ -95,25 +102,41 @@ object frmTurma: TfrmTurma
       MaxLength = 4
       TabOrder = 3
     end
+    object dblModalidade: TDBLookupComboBox
+      Left = 9
+      Top = 122
+      Width = 496
+      Height = 23
+      DataField = 'IDMODALIDADE'
+      DataSource = DM.dsrTurma
+      KeyField = 'ID'
+      ListField = 'NOME'
+      ListSource = DM.dsrModalidade
+      TabOrder = 4
+    end
   end
   object btnGravar: TBitBtn
     Left = 308
-    Top = 113
+    Top = 153
     Width = 103
-    Height = 29
+    Height = 26
     Align = alRight
     Caption = '&Gravar'
     TabOrder = 1
     OnClick = btnGravarClick
+    ExplicitTop = 113
+    ExplicitHeight = 29
   end
   object btnCancelar: TBitBtn
     Left = 411
-    Top = 113
+    Top = 153
     Width = 103
-    Height = 29
+    Height = 26
     Align = alRight
     Caption = '&Cancelar'
     TabOrder = 2
     OnClick = btnCancelarClick
+    ExplicitTop = 113
+    ExplicitHeight = 29
   end
 end

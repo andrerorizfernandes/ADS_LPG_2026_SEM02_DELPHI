@@ -37,6 +37,13 @@ type
     qryTurmaANO: TIntegerField;
     qryTurmaDATAHORA: TSQLTimeStampField;
     qryTurmaEXCLUIDO: TBooleanField;
+    qryModalidade: TFDQuery;
+    dsrModalidade: TDataSource;
+    qryModalidadeID: TIntegerField;
+    qryModalidadeNOME: TStringField;
+    qryModalidadeDATAHORA: TSQLTimeStampField;
+    qryTurmaIDMODALIDADE: TIntegerField;
+    qryTurmaMODALIDADE: TStringField;
   private
     { Private declarations }
   public

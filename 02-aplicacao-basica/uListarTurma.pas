@@ -22,8 +22,10 @@ type
     procedure btnInserirClick(Sender: TObject);
     procedure btnEditarClick(Sender: TObject);
     procedure dbgTurmaDblClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
-    procedure ListarTurmas;
+    procedure AbrirEstrutura;
+    procedure FecharEstrutura;
     procedure ExcluirTurma;
     procedure AbrirTelaTurma(const Operacao: TOperacao);
     { Private declarations }
@@ -38,6 +40,15 @@ uses
   uTurma;
 
 {$R *.dfm}
+
+procedure TfrmListarTurma.AbrirEstrutura;
+begin
+  if (not DM.qryTurma.Active) then
+    DM.qryTurma.Open;
+
+  if (not DM.qryModalidade.Active) then
+    DM.qryModalidade.Open;
+end;
 
 procedure TfrmListarTurma.AbrirTelaTurma(const Operacao: TOperacao);
 begin
@@ -94,16 +105,21 @@ begin
   AtualizarQuantidadeDeRegistros(DM.qryTurma, lblTotalizador);
 end;
 
+procedure TfrmListarTurma.FecharEstrutura;
+begin
+  DM.qryTurma.Close;
+  DM.qryModalidade.Close;
+end;
+
 procedure TfrmListarTurma.FormActivate(Sender: TObject);
 begin
-  ListarTurmas;
+  AbrirEstrutura;
   AjustarColunas(dbgTurma);
   AtualizarQuantidadeDeRegistros(DM.qryTurma, lblTotalizador);
 end;
 
-procedure TfrmListarTurma.ListarTurmas;
+procedure TfrmListarTurma.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  if (not DM.qryTurma.Active) then
-    DM.qryTurma.Open;
+  FecharEstrutura;
 end;
 end.

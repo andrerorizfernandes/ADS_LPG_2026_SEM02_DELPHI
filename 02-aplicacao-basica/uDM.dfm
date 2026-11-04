@@ -133,8 +133,11 @@ object DM: TDM
       '  t.REPRESENTANTE,'
       '  t.ANO,'
       '  t.DATAHORA,'
-      '  t.EXCLUIDO'
-      'FROM TURMA t '
+      '  t.EXCLUIDO,'
+      '  t.IDMODALIDADE,'
+      '  m.NOME MODALIDADE'
+      'FROM TURMA t'
+      'LEFT JOIN MODALIDADE m ON m.ID = t.IDMODALIDADE '
       'WHERE (t.Excluido = false)')
     Left = 32
     Top = 176
@@ -172,10 +175,53 @@ object DM: TDM
       FieldName = 'EXCLUIDO'
       Origin = 'EXCLUIDO'
     end
+    object qryTurmaIDMODALIDADE: TIntegerField
+      FieldName = 'IDMODALIDADE'
+      Origin = 'IDMODALIDADE'
+    end
+    object qryTurmaMODALIDADE: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'MODALIDADE'
+      Origin = 'NOME'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 50
+    end
   end
   object dsrTurma: TDataSource
     DataSet = qryTurma
     Left = 112
     Top = 176
+  end
+  object qryModalidade: TFDQuery
+    Connection = Conexao
+    SQL.Strings = (
+      'SELECT'
+      '  m.ID,'
+      '  m.NOME,'
+      '  m.DATAHORA '
+      'FROM MODALIDADE m ')
+    Left = 32
+    Top = 256
+    object qryModalidadeID: TIntegerField
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+    end
+    object qryModalidadeNOME: TStringField
+      FieldName = 'NOME'
+      Origin = 'NOME'
+      Required = True
+      Size = 50
+    end
+    object qryModalidadeDATAHORA: TSQLTimeStampField
+      FieldName = 'DATAHORA'
+      Origin = 'DATAHORA'
+    end
+  end
+  object dsrModalidade: TDataSource
+    DataSet = qryModalidade
+    Left = 112
+    Top = 256
   end
 end
