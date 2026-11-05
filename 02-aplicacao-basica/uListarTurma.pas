@@ -56,6 +56,7 @@ begin
   try
     lTelaTurma.Operacao := Operacao;
     lTelaTurma.ShowModal;
+    AtualizarQuantidadeDeRegistros(DM.qryTurma, lblTotalizador);
   finally
     lTelaTurma.Free;
   end;

@@ -147,6 +147,14 @@
             <Form>frmTurma</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="uListarModalidade.pas">
+            <Form>frmListarModalidade</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uModalidade.pas">
+            <Form>frmModalidade</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

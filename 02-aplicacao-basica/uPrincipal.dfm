@@ -290,6 +290,10 @@ object frmPrincipal: TfrmPrincipal
         Caption = '&Turma'
         OnClick = urma1Click
       end
+      object Modalidade1: TMenuItem
+        Caption = '&Modalidade'
+        OnClick = Modalidade1Click
+      end
     end
     object Sair1: TMenuItem
       Caption = '&Sair'

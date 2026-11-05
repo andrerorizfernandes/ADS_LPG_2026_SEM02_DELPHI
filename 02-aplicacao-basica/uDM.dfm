@@ -199,8 +199,10 @@ object DM: TDM
       'SELECT'
       '  m.ID,'
       '  m.NOME,'
-      '  m.DATAHORA '
-      'FROM MODALIDADE m ')
+      '  m.DATAHORA,'
+      '  m.EXCLUIDO'
+      'FROM MODALIDADE m '
+      'WHERE (m.Excluido = false)')
     Left = 32
     Top = 256
     object qryModalidadeID: TIntegerField
@@ -217,6 +219,10 @@ object DM: TDM
     object qryModalidadeDATAHORA: TSQLTimeStampField
       FieldName = 'DATAHORA'
       Origin = 'DATAHORA'
+    end
+    object qryModalidadeEXCLUIDO: TBooleanField
+      FieldName = 'EXCLUIDO'
+      Origin = 'EXCLUIDO'
     end
   end
   object dsrModalidade: TDataSource

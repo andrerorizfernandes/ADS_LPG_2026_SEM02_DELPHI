@@ -44,6 +44,7 @@ type
     qryModalidadeDATAHORA: TSQLTimeStampField;
     qryTurmaIDMODALIDADE: TIntegerField;
     qryTurmaMODALIDADE: TStringField;
+    qryModalidadeEXCLUIDO: TBooleanField;
   private
     { Private declarations }
   public

@@ -17,10 +17,12 @@ type
     imgPrincipal: TImage;
     tmrPrincipal: TTimer;
     urma1: TMenuItem;
+    Modalidade1: TMenuItem;
     procedure tmrPrincipalTimer(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure Aluno1Click(Sender: TObject);
     procedure urma1Click(Sender: TObject);
+    procedure Modalidade1Click(Sender: TObject);
   private
     FHoraLogin: TTime;
 
@@ -29,6 +31,7 @@ type
     function TempoLogadoNoSistema(const HoraDoLogin: TTime): TTime;
     procedure AbrirTelaAluno;
     procedure AbrirTelaListagemTurma;
+    procedure AbrirTelaListagemModalidade;
     { Private declarations }
   public
     { Public declarations }
@@ -42,7 +45,8 @@ implementation
 uses
   System.SysUtils,
   uAluno,
-  uListarTurma;
+  uListarTurma,
+  uListarModalidade;
 
 {$R *.dfm}
 
@@ -53,6 +57,16 @@ begin
     lTelaAluno.ShowModal;
   finally
     lTelaAluno.Free;
+  end;
+end;
+
+procedure TfrmPrincipal.AbrirTelaListagemModalidade;
+begin
+  var lTelaListarModalidade := TfrmListarModalidade.Create(nil);
+  try
+    lTelaListarModalidade.ShowModal;
+  finally
+    lTelaListarModalidade.Free;
   end;
 end;
 
@@ -95,6 +109,11 @@ end;
 procedure TfrmPrincipal.FormActivate(Sender: TObject);
 begin
   CapturarHoraDoLogin;
+end;
+
+procedure TfrmPrincipal.Modalidade1Click(Sender: TObject);
+begin
+  AbrirTelaListagemModalidade;
 end;
 
 procedure TfrmPrincipal.tmrPrincipalTimer(Sender: TObject);
